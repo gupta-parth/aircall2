@@ -1,6 +1,7 @@
 import React from 'react'
 import ActivityDetail from './ActivityDetail.jsx'
 import { useState } from 'react'
+import Button from '@material-ui/core/Button';
 
 
 const getCalls = () => fetch("https://aircall-job.herokuapp.com/activities")
@@ -76,8 +77,8 @@ const ActivityFeed = () => {
     
     return (
         <div className='activity-feed'>
-            <button onClick={handleCalls}>Show Activity </button>
-            <button onClick={handleArchives}>Show archive</button>
+            <Button variant='outlined' onClick={handleCalls}>Show Activity </Button>
+            <Button variant='outlined' onClick={handleArchives}>Show archive</Button>
             <ul>
                 <Display calls={callsList} value={toggleFeed}/>
             </ul>
