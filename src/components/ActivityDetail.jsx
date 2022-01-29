@@ -7,7 +7,6 @@ const AcitivityDetail = ({call}) => {
             <p>Caller : {call.from}</p>
             <p>Time : {call.created_at}</p>
             <p>Device : {call.to}</p>
-            <p>is_archived : {call.is_archived} </p>
         </div>
     )
 };
