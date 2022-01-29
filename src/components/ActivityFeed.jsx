@@ -19,8 +19,9 @@ const ArchiveButton = ({call}) => {
 
 const archiveCall = (callID) => {
     const handle = () => {
-
+        
     }
+    return handle
 }
 
 
