@@ -11,7 +11,7 @@ const getCalls = () => fetch("https://aircall-job.herokuapp.com/activities")
 
 const ArchiveButton = ({call}) => {
     return (
-    <button onClick={archiveCall(call.id)}>Archive</button>
+    <Button variant='outlined' size='' onClick={archiveCall(call.id)}>Archive</Button>
     )
 
 }
@@ -77,8 +77,8 @@ const ActivityFeed = () => {
     
     return (
         <div className='activity-feed'>
-            <Button variant='outlined' onClick={handleCalls}>Show Activity </Button>
-            <Button variant='outlined' onClick={handleArchives}>Show archive</Button>
+            <Button color='primary' variant='outlined' onClick={handleCalls}>Show Activity </Button>
+            <Button color='primary' variant='outlined' onClick={handleArchives}>Show archive</Button>
             <ul>
                 <Display calls={callsList} value={toggleFeed}/>
             </ul>
