@@ -23,32 +23,55 @@ const archiveCall = (callID) => {
 }
 
 
-const Display = ({calls}) => {
-    return (
-        <div>
-            {calls.filter(call => !call.is_archived).map(function(call) {
-                    return (
-                        <React.Fragment key={call.id}>
-                        <ActivityDetail call={call}/>
-                        <ArchiveButton call={call} />
-                        </React.Fragment>
-                    )
-                    })
-            } 
-        </div>
-    )
+const Display = ({calls, value}) => {
+    if (value === true) {
+        return (
+            <div>
+                {calls.filter(call => !call.is_archived).map(function(call) {
+                        return (
+                            <React.Fragment key={call.id}>
+                            <ActivityDetail call={call}/>
+                            <ArchiveButton call={call} />
+                            </React.Fragment>
+                        )
+                        })
+                } 
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                {calls.filter(call => call.is_archived).map(function(call) {
+                        return (
+                            <React.Fragment key={call.id}>
+                            <ActivityDetail call={call}/>
+                            <ArchiveButton call={call} />
+                            </React.Fragment>
+                        )
+                        })
+                } 
+            </div>
+        )
+    }
 }
 
 
 const ActivityFeed = () => {
     const [ callsList, setCallsList ] = useState([])
+    const [toggleFeed, setToggleFeed] = useState(true)
+
 
     const handleCalls = () => {
         getCalls().then((data) => setCallsList(data));
+        const toggle = true
+        setToggleFeed(toggle)
     }
 
     const handleArchives = () => {
-
+        getCalls().then((data) => setCallsList(data));
+        const toggle = false
+        setToggleFeed(toggle)
     }
     
     return (
@@ -56,7 +79,7 @@ const ActivityFeed = () => {
             <button onClick={handleCalls}>Show Activity </button>
             <button onClick={handleArchives}>Show archive</button>
             <ul>
-                <Display calls={callsList}/>
+                <Display calls={callsList} value={toggleFeed}/>
             </ul>
         </div>
     )
