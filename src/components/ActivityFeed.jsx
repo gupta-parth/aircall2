@@ -4,11 +4,14 @@ import { useState } from 'react'
 import Button from '@material-ui/core/Button';
 
 
+// Connects to the API and fetches all the JSON data 
 const getCalls = () => fetch("https://aircall-job.herokuapp.com/activities")
                         .then((response) => response.json())
                         .then((data) => {return data;});
 
 
+
+// There's probably a better way to do this but I tried
 const ArchiveButton = ({call}) => {
     return (
     <Button variant='outlined' size='' onClick={archiveCall(call.id)}>Archive</Button>
@@ -16,10 +19,10 @@ const ArchiveButton = ({call}) => {
 
 }
 
-
+// TODO: Make it functional
 const archiveCall = (callID) => {
     const handle = () => {
-        
+
     }
     return handle
 }
@@ -29,6 +32,10 @@ const Display = ({calls, value}) => {
     if (value === true) {
         return (
             <div>
+                {/*
+                The filter method filters out all the calls that are unarchived and then the map converts each 
+                call into jsx fragment
+                */}
                 {calls.filter(call => !call.is_archived).map(function(call) {
                         return (
                             <React.Fragment key={call.id}>
@@ -60,16 +67,18 @@ const Display = ({calls, value}) => {
 
 
 const ActivityFeed = () => {
-    const [ callsList, setCallsList ] = useState([])
-    const [toggleFeed, setToggleFeed] = useState(true)
+    const [ callsList, setCallsList ] = useState([])    // Main call list 
+    const [toggleFeed, setToggleFeed] = useState(true)  // Used to toggle between archived and unarchived calls
 
 
+
+    // Handlers for the buttons 
     const handleCalls = () => {
         getCalls().then((data) => setCallsList(data));
         const toggle = true
         setToggleFeed(toggle)
     }
-
+    
     const handleArchives = () => {
         getCalls().then((data) => setCallsList(data));
         const toggle = false
