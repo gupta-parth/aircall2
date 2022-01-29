@@ -3,12 +3,6 @@ import AcitivityDetail from './ActivityDetail.jsx'
 import { useState } from 'react'
 
 
-// const fetchCalls = () => {
-//     return fetch("https://aircall-job.herokuapp.com/activities")
-//                 .then((response) => response.json());
-// }
-
-
 const getCalls = () => fetch("https://aircall-job.herokuapp.com/activities")
                         .then((response) => response.json())
                         .then((data) => {return data;});
@@ -32,7 +26,7 @@ const ActivityFeed = () => {
         <div className='activity-feed'>
             <button onClick={handleCalls}>Activity </button>
             <ul>
-                {callsList.map(call => 
+                {callsList.filter(call => !call.is_archived).map(call => 
                     <AcitivityDetail key={call.id} call={call}/>
                 )}
             </ul>
